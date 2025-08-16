@@ -1,6 +1,6 @@
 function Invoke-Bootstrap {
-   Invoke-RestMethod https://raw.githubusercontent.com/avengineers/bootstrap-installer/v1.6.2/install.ps1 | Invoke-Expression
-   . .\.bootstrap\bootstrap.ps1
+    Invoke-RestMethod https://raw.githubusercontent.com/avengineers/bootstrap-installer/v1.16.0/install.ps1 | Invoke-Expression
+    . .\.bootstrap\bootstrap.ps1
 }
 
 ## start of script
@@ -12,10 +12,16 @@ $InformationPreference = "Continue"
 $ErrorActionPreference = "Stop"
 
 Push-Location $PSScriptRoot
+Write-Output "Running in ${pwd}"
 
 try {
-   Invoke-Bootstrap
-   npm install
+    Invoke-Bootstrap
+   
+    # Praise our company's proxy setup
+    $env:PUPPETEER_SKIP_DOWNLOAD = "1"
+    npm config set strict-ssl false
+
+    npm install
 }
 finally {
    Pop-Location

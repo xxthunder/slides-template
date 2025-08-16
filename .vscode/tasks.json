@@ -4,12 +4,7 @@
       {
          "label": "Install dependencies",
          "type": "shell",
-         "command": "npm install",
-         "options": {
-            "env": {
-               "PUPPETEER_SKIP_DOWNLOAD": "1"
-            }
-         },
+         "command": ".\\build.ps1 -install",
          "problemMatcher": []
       },
       {
